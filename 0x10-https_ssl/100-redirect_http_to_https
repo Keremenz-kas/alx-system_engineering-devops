@@ -36,10 +36,11 @@ defaults
 frontend http
 	bind *:80
 	bind :443 ssl crt /etc/letsencrypt/live/www.keremenz-kas.tech/all.pem
+	http-request redirect scheme https code 301 unless { ssl_fc }
 	mode http
 	default_backend serve
 
 backend serve
 	balance roundrobin
 	server 3344-web-01 100.24.235.108:80 check
-	server 3344-web-02 54.165.63.154:80 check
+	server 3344-web-02 56.165.63.154:80 check
